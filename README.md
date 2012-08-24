@@ -1,0 +1,4 @@
+qookie
+======
+
+NME Socket abstraction
