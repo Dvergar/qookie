@@ -1,4 +1,4 @@
-package sookie.net;
+package qookie.net;
 
 import nme.events.Event;
  

@@ -1,4 +1,4 @@
-package sookie.net;
+package qookie.net;
 
 @:native("WebSocket") extern class WebSocket {
     function new(url:String):Void;

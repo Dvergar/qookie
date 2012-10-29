@@ -1,4 +1,4 @@
-package sookie.tools;
+package qookie.tools;
 
 @:native("ArrayBuffer") extern class ArrayBuffer {
     public function new(length:Int) : Void;

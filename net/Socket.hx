@@ -1,4 +1,4 @@
-package sookie.net;
+package qookie.net;
 
 // import sookie.net.SocketEvent;
 
@@ -101,7 +101,7 @@ class Socket extends nme.events.EventDispatcher {
 }
 
 #elseif js
-import sookie.tools.TypedArray;
+import qookie.tools.TypedArray;
 
 class Socket extends nme.events.EventDispatcher {
     private var socket:WebSocket;
@@ -251,7 +251,9 @@ class Socket extends nme.events.EventDispatcher {
             var sockets = sys.net.Socket.select([this.socket], null, null, 0);
             if(sockets.read.length > 0) {
                 try {
-                    this.input.writeByte(socket.input.readByte());
+                    var tmp = socket.input.readByte();
+                    // trace(tmp);
+                    this.input.writeByte(tmp);
                     dataReceived = true;
                 }
                 catch(e:Dynamic) {
@@ -268,8 +270,10 @@ class Socket extends nme.events.EventDispatcher {
         }
 
         if(dataReceived) {
+            this.input.position = 0;
             var sEvt = new SocketEvent("onData");
             dispatchEvent(sEvt);
+            this.input.clear();
         }
     }
     
@@ -280,9 +284,8 @@ class Socket extends nme.events.EventDispatcher {
             var sEvt = new SocketEvent("onConnect");
             dispatchEvent(sEvt);
             this.connected = true;
-            
-            // this.myTimer = new haxe.Timer(1 / 10 * 1000);
-            // this.myTimer.run = this.checkDatas;
+            this.myTimer = new haxe.Timer(1 / 10 * 1000);
+            this.myTimer.run = this.checkDatas;
         }
         catch(e:Dynamic) {
             trace("error >" + e);
