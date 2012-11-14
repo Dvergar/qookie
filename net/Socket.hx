@@ -122,6 +122,7 @@ class Socket extends nme.events.EventDispatcher {
 
     public function connect(ip:String, port:Int) {
         this.socket = new WebSocket("ws://" + ip + ":" + Std.string(port + 1));
+        trace("connection on > ws://" + ip + ":" + Std.string(port + 1));
         this.socket.binaryType = "arraybuffer";
         socket.onopen = function (event:Dynamic):Void {
             trace("websocket opened...");
@@ -237,10 +238,10 @@ class Socket extends nme.events.EventDispatcher {
         super();
         this.input = new nme.utils.ByteArray();
         this.output = new nme.utils.ByteArray();
-        this.output.endian = nme.utils.Endian.BIG_ENDIAN; 
+        // this.output.endian = nme.utils.Endian.BIG_ENDIAN; 
         this.socket = new sys.net.Socket();
-        this.socket.output.bigEndian = true;
-        this.socket.input.bigEndian = true;
+        // this.socket.output.bigEndian = true;
+        // this.socket.input.bigEndian = true;
         this.connected = false;
         // this.socket.setBlocking(false);
     }
@@ -251,9 +252,14 @@ class Socket extends nme.events.EventDispatcher {
             var sockets = sys.net.Socket.select([this.socket], null, null, 0);
             if(sockets.read.length > 0) {
                 try {
+                    // Returns unsigned bytes wtf
                     var tmp = socket.input.readByte();
-                    // trace(tmp);
+                    // trace(">" + tmp + "<");
                     this.input.writeByte(tmp);
+
+                    // var tmp = socket.input.readAll(sockets.read.length);
+                    // this.input.writeBytes(tmp);
+
                     dataReceived = true;
                 }
                 catch(e:Dynamic) {
@@ -276,7 +282,7 @@ class Socket extends nme.events.EventDispatcher {
             this.input.clear();
         }
     }
-    
+
     public function connect(ip:String, port:Int) {
         var host = new sys.net.Host(ip);
         try {
@@ -318,6 +324,7 @@ class Socket extends nme.events.EventDispatcher {
     
     public function readShort():Int {
         return this.input.readShort();
+        // return readInt16()
     }
     
     public function readUnsignedByte():Int {
