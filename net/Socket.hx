@@ -71,7 +71,11 @@ class Socket extends nme.events.EventDispatcher {
 
     public function readByte():Int {
         return socket.readByte();
-    }    
+    }
+
+    public function readDouble():Float {
+        return socket.readDouble();
+    }
     
     public function readInt():Int {
         return socket.readInt();
@@ -83,6 +87,14 @@ class Socket extends nme.events.EventDispatcher {
 
     public function readUnsignedByte():Int {
         return socket.readUnsignedByte();
+    }
+
+    public function readUnsignedInt():Int {
+        return socket.readUnsignedInt();
+    }
+
+    public function readUnsignedShort():Int {
+        return socket.readUnsignedShort();
     }  
     
     public function update() {}
@@ -191,6 +203,13 @@ class Socket extends nme.events.EventDispatcher {
         return data;
     }
 
+    public function readDouble():Float {
+        this.bytesLeft -= 8;
+        var data = this.input.getFloat64(this.dataPos);
+        this.dataPos += 8;
+        return data;
+    }
+
     public function readShort():Int {
         this.bytesLeft -= 2;
         var data = this.input.getInt16(this.dataPos);
@@ -203,7 +222,21 @@ class Socket extends nme.events.EventDispatcher {
         var data = this.input.getUint8(this.dataPos);
         this.dataPos += 1;
         return data;
-    } 
+    }
+
+    public function readUnsignedInt():Int {
+        this.bytesLeft -= 4;
+        var data = this.input.getUint32(this.dataPos);
+        this.dataPos += 4;
+        return data;
+    }
+
+    public function readUnsignedShort():Int {
+        this.bytesLeft -= 2;
+        var data = this.input.getUint16(this.dataPos);
+        this.dataPos += 2;
+        return data;
+    }
     
     public function update() {}
 
@@ -314,6 +347,10 @@ class Socket extends nme.events.EventDispatcher {
         return this.input.readBoolean();
     }
 
+    public function readDouble():Float {
+        return this.input.readDouble();
+    }
+
     public function readByte():Int {
         return this.input.readByte();
     }
@@ -324,11 +361,18 @@ class Socket extends nme.events.EventDispatcher {
     
     public function readShort():Int {
         return this.input.readShort();
-        // return readInt16()
     }
     
     public function readUnsignedByte():Int {
         return this.input.readUnsignedByte();
+    }
+
+    public function readUnsignedInt():Int {
+        return this.input.readUnsignedInt();
+    }
+
+    public function readUnsignedShort():Int {
+        return this.input.readUnsignedShort();
     }
 
     public function update() {
