@@ -42,7 +42,8 @@ extern interface ArrayBufferView {
     public static var BYTES_PER_ELEMENT:Int;
 	public var buffer(default,null):ArrayBuffer;
 	public var IntOffset(default,null):Int;
-	public var IntLength(default,null):Int;
+    public var IntLength(default,null):Int;
+	public var length(default,null):Int;
 	function new(buffer:Dynamic, ?byteOffset:Int, ?length:Int):Void;
     
     public function subarray(begin:Int, end:Int):Uint8Array;

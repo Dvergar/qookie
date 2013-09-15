@@ -1,6 +1,6 @@
 package qookie.net;
 
-import nme.events.Event;
+import flash.events.Event;
  
 class SocketEvent extends Event {
     public static var CONNECT:String = "onConnect";
