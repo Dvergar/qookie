@@ -246,7 +246,8 @@ class SampleGame extends Sprite {
         s.addEventListener(SocketEvent.CLOSE, onClose);
         s.addEventListener(SocketEvent.IO_ERROR, onError);
         s.addEventListener(SocketEvent.SOCKET_DATA, onData);
-        s.connect("127.0.0.1", 4999);
+        // s.connect("caribouloche.mooo.com", 49999);
+        s.connect("192.168.1.42", 49999);
 
         Lib.current.stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
     }
@@ -280,6 +281,8 @@ class SampleGame extends Sprite {
                     this.myId = id;
                     this.localShip = new LocalShip(x, y);
                     this.addChild(localShip);
+
+                    ship.alpha = 0.5;
                     
                     // UNDEBUG
                     // this.removeChild(ship);
@@ -398,12 +401,10 @@ class SampleGame extends Sprite {
         trace("Sookie > Error");
     }
     
-    // CONTROLLER
     private function onEnterFrame(event:Event):Void {
         var elapsedTime:Float = Lib.getTimer() - lastTime;
         if(elapsedTime > 1 / 60) {
 
-            // If i'm connected...
             if(this.gameIsRunning) {
                 this.localShip.updatePosition2(keyLeftIsDown,
                                                 keyRightIsDown,

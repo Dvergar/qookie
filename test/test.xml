@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  
+  <app main="Test" path="Export" file="Test" />
+  <source path="Source" />
+  <haxelib name="openfl" />
+  <source path="./../src" />
+
+</project>

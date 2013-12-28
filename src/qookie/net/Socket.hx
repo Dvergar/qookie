@@ -312,7 +312,7 @@ class Socket extends flash.events.EventDispatcher implements ISocket
 }
 
 
-#elseif (cpp||neko)
+#elseif (cpp||neko||java)
 
 class Socket extends flash.events.EventDispatcher
 {
@@ -401,8 +401,8 @@ class Socket extends flash.events.EventDispatcher
             var sEvt = new SocketEvent("onConnect");
             dispatchEvent(sEvt);
             this.isConnected = true;
-            this.myTimer = new haxe.Timer(1 / 10 * 1000);
-            this.myTimer.run = this.checkDatas;
+            // this.myTimer = new haxe.Timer(1 / 10 * 1000);
+            // this.myTimer.run = this.checkDatas;
         }
         catch(e:Dynamic)
         {

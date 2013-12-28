@@ -1,0 +1,4 @@
+*.sublime-project
+*.sublime-workspace
+sample-game/Export
+test/Export

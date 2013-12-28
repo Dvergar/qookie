@@ -2,7 +2,7 @@
 <project>
   
   <app main="SampleGame" path="Export" file="SampleGame"/>
-  <window width="640" height="480" fps="30" orientation="portrait" resizable="true" background="15171F"/>
+  <window width="640" height="480" fps="30" orientation="landscape" resizable="false" background="15171F"/>
   <source path="Source" />
   <source path="./../src" />
   <haxelib name="openfl" />
