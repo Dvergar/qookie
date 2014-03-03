@@ -1,12 +1,40 @@
 # Qookie
 
-Qookie is a socket abstraction for NME in order to reflect the same behaviour as the flash socket library.
+Qookie is a socket abstraction for OpenFL in order to reflect the same behaviour as the flash socket library.
 
-All methods are not supported yet.
+It's been (unit-)tested for android, cpp, neko, flash & html5 targets for basic write/read methods.
 
-Roadmap :
-* Isolate qookie from NME, making a qookie-openfl lib or something
-* More unit-tests, behaviour tests
-* haxe3 compatible
-* openfl compatible
-* hiding it behind openfl.net.socket ?
+## Instructions
+
+Import
+
+    import qookie.net.Socket
+    
+get the socket
+
+    var socket = new Socket();
+        
+add events
+
+    socket.addEventListener(SocketEvent.CONNECT, onConnect);
+    socket.addEventListener(SocketEvent.CLOSE, onClose);
+    socket.addEventListener(SocketEvent.IO_ERROR, onError);
+    socket.addEventListener(SocketEvent.SOCKET_DATA, onData);
+    
+connect
+
+    socket.connect("127.0.0.1", 4999);
+    
+write to it
+
+    socket.writeByte(99);
+    
+flush the datas
+
+    socket.flush();
+
+**Note :** *`flush` is generally unreliable because it depends on your system and in the case of haxe the target, so i'm enforcing its use here, every writeX method will actually buffer the data and `flush` will push it to the socket.*
+
+**Note2 :** *Error handling is really basic and not mimicing flash at the moment*.
+
+Not implemented yet : `writeBytes`, `readBytes`, `writeObject`, `readObject`, `timeout`, `bytesPending`, `objectEncoding`
