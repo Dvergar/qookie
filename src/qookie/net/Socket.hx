@@ -131,6 +131,16 @@ class Socket extends flash.events.EventDispatcher implements ISocket
 
     public function readUTFBytes(length:Int):String {return socket.readUTFBytes(length); }
     
+    public function readBytes(data:ByteArray, ?offset:Int, ?length:Int):Void
+    {
+        return socket.readBytes(data, offset, length);
+    }
+
+    public function writeBytes(bytes:ByteArray, ?offset:Int, ?length:Int):Void
+    {
+        return output.writeBytes(bytes, offset, length);
+    }
+
     public function update() {}
     
     public function writeBoolean(c:Bool) {output.writeBoolean(c); }
@@ -288,7 +298,21 @@ class Socket extends flash.events.EventDispatcher implements ISocket
 
     public function readUTF():String {return input.readUTF(); }
 
-    public function readUTFBytes(length:Int):String {return input.readUTFBytes(length); }
+    public function readUTFBytes(length:Int):String
+    {
+        throw("not supported yet for html target :(");
+        return input.readUTFBytes(length);
+    }
+
+    public function readBytes(data:ByteArray, ?offset:Int, ?length:Int):Void
+    {
+        return input.readBytes(data, offset, length);
+    }
+
+    public function writeBytes(bytes:ByteArray, ?offset:Int, ?length:Int):Void
+    {
+        return output.writeBytes(bytes, offset, length);
+    }
 
     public function update() {}
     
@@ -314,7 +338,7 @@ class Socket extends flash.events.EventDispatcher implements ISocket
 
 #elseif (cpp||neko||java)
 
-class Socket extends flash.events.EventDispatcher
+class Socket extends flash.events.EventDispatcher implements ISocket
 {
     private var socket:sys.net.Socket;
     private var myTimer:haxe.Timer;
@@ -444,7 +468,8 @@ class Socket extends flash.events.EventDispatcher
 
     public function readUTF():String {return input.readUTF(); }
 
-    public function readUTFBytes(length:Int):String {return input.readUTFBytes(length); }
+    public function readUTFBytes(length:Int):String {
+        return input.readUTFBytes(length); }
 
     public function update(event:Event)
     {
@@ -454,6 +479,16 @@ class Socket extends flash.events.EventDispatcher
         }
     }
     
+    public function readBytes(data:ByteArray, ?offset:Int, ?length:Int):Void
+    {
+        return input.readBytes(data, offset, length);
+    }
+
+    public function writeBytes(bytes:ByteArray, ?offset:Int, ?length:Int):Void
+    {
+        return output.writeBytes(bytes, offset, length);
+    }
+
     public function writeBoolean(c:Bool) {output.writeBoolean(c); }
     
     public function writeByte(c:Int) {output.writeByte(c); }

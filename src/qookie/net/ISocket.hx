@@ -10,7 +10,7 @@ interface ISocket
 	
 	public function readBoolean ():Bool;
 	public function readByte ():Int;
-	// public function readBytes (data:ByteArray, offset:Int = 0, length:Int = 0):Void;
+	public function readBytes (data:ByteArray, ?offset:Int, ?length:Int):Void;
 	public function readDouble ():Float;
 	public function readFloat ():Float;
 	public function readInt ():Int;
@@ -23,7 +23,7 @@ interface ISocket
 
 	public function writeBoolean (value:Bool):Void;
 	public function writeByte (value:Int):Void;
-	// public function writeBytes (bytes:Bytes, offset:Int = 0, length:Int = 0):Void;
+	public function writeBytes (bytes:ByteArray, ?offset:Int, ?length:Int):Void;
 	public function writeDouble (value:Float):Void;
 	public function writeFloat (value:Float):Void;
 	public function writeInt (value:Int):Void;

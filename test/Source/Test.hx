@@ -7,6 +7,7 @@ import flash.events.KeyboardEvent;
 import flash.Lib;
 import flash.ui.Keyboard;
 import flash.net.Socket;
+import flash.utils.ByteArray;
 // import flash.events.ProgressEvent;
 // import flash.events.IOErrorEvent;
 
@@ -71,6 +72,11 @@ class Test extends Sprite
             var s = socket.readUTF();
             var ss = socket.readUTFBytes(5);
 
+            var ba = new ByteArray();
+            socket.readBytes(ba);
+            var b1 = ba.readByte();
+            var b2 = ba.readByte();
+
             trace(bo);
             trace(b);
             trace(bb);
@@ -82,6 +88,7 @@ class Test extends Sprite
             trace(f);
             trace(s);
             trace(ss);
+            trace(b1 + " / " + b2);
 
             assertEquals(bo, true);
             assertEquals(b, -128);
@@ -96,6 +103,8 @@ class Test extends Sprite
             assertEquals(f, 5.4444);
             assertEquals(s, "hello");
             assertEquals(ss, "world");
+            assertEquals(b1, 4);
+            assertEquals(b2, 2);
 
             trace("send");
             socket.writeBoolean(bo);
@@ -109,6 +118,11 @@ class Test extends Sprite
             socket.writeFloat(f);
             socket.writeUTF(s);
             socket.writeUTFBytes(ss);
+            ba.position = 0;
+            // socket.writeBytes(ba, 0, ba.length -1);
+            socket.writeBytes(ba);
+            // socket.writeByte(1);
+            // socket.writeByte(2);
             socket.flush();
 
             msglen == 0;
