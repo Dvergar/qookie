@@ -1,5 +1,7 @@
 # Qookie
 
+*Note: OpenFL now seems to support the net package, so you should probably just use that :)*
+
 Qookie is a socket abstraction for OpenFL in order to reflect the same behaviour as the flash socket library.
 
 It's been (unit-)tested for android, cpp, neko, flash & html5 targets for basic write/read methods.
